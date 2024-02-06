@@ -7,14 +7,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// connection string
-builder.services.AddDbContext<OrderingDbContext>(options =>
-{
-    options.UseSqlServer(
-        Configuration.GetConnectionString("DBConn")
-        );
-});
-
 
 var app = builder.Build();
 
