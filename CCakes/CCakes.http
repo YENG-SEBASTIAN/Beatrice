@@ -1,0 +1,6 @@
+@CCakes_HostAddress = http://localhost:5291
+
+GET {{CCakes_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
