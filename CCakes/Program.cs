@@ -11,7 +11,7 @@ builder.Services.AddSwaggerGen();
 builder.services.AddDbContext<OrderingDbContext>(options =>
 {
     options.UseSqlServer(
-        Configuration.GetConnectionString("DefaultConnection")
+        Configuration.GetConnectionString("DBConn")
         );
 });
 
