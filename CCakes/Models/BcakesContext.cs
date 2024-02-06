@@ -23,8 +23,17 @@ public partial class BcakesContext : DbContext
 
     public virtual DbSet<Product> Products { get; set; }
 
-    // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    //     => optionsBuilder.UseSqlServer("Server=localhost;Database=BCakes;Trusted_Connection=True;Encrypt=True;TrustServerCertificate=True;");
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder){
+        if(!optionsBuilder.IsConfigured){
+            IConfigurationRoot Configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json")
+            .Build();
+
+            var connString = Configuration.GetConnectionString("DBConn");
+            optionsBuilder.UseSqlServer(connString);
+        }
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -1,3 +1,6 @@
+using CCakes.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -8,12 +11,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // connection string
-builder.services.AddDbContext<BcakesContext>(options =>
-{
-    options.UseSqlServer(
-        Configuration.GetConnectionString("DBConn")
-        );
-});
+builder.Services.AddDbContext<BcakesContext>(
+    o => {
+        o.UseSqlServer(builder.Configuration.GetConnectionString("DBConn"));
+    }
+);
 
 
 var app = builder.Build();
