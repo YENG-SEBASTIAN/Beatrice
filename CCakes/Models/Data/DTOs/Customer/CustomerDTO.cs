@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
+using CCakes.Models;
 namespace CCakes.Models.Data.DTOs.Customer;
 
 public class CustomerDTO
@@ -15,7 +11,5 @@ public class CustomerDTO
     public string LastName { get; set; }
 
     public string Email { get; set; }
-
-    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
 }

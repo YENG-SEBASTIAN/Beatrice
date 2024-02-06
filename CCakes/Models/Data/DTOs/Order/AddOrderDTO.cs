@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
+using CCakes.Models;
 namespace CCakes.Models.Data.DTOs.Order;
 
 public class AddOrderDTO
@@ -11,7 +8,4 @@ public class AddOrderDTO
 
     public DateTime? OrderDate { get; set; }
 
-    public virtual Customer Customer { get; set; }
-
-    public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 }
