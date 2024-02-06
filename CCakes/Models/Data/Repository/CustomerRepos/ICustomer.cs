@@ -1,3 +1,4 @@
+using CCakes.Models.Data.DTOs.Customer;
 
 namespace CCakes.Models.Data.Repository.CustomerRepos
 {

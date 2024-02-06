@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CCakes")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7fa4a7495ac9a545de86d0290a5002a1746aa36e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1403e7e0eb5fa0101cb3da0d4392e31c9b664532")]
 [assembly: System.Reflection.AssemblyProductAttribute("CCakes")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CCakes")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
