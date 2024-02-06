@@ -7,6 +7,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// connection string
+builder.services.AddDbContext<OrderingDbContext>(options =>
+{
+    options.UseSqlServer(
+        Configuration.GetConnectionString("DefaultConnection")
+        );
+});
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
