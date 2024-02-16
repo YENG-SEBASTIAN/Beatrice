@@ -7,41 +7,41 @@ using aspCake.Models;
 
 namespace aspCake.Data.Repository.BaseRepo
 {
-    public class BaseRepository<ClassInstance> : IBaseRepository<ClassInstance> where ClassInstance : class, new()
+    public class BaseRepository<T> : IBaseRepository<T> where T : class, new()
     {
-        private readonly BcakesContext _dbContext;
-        public BaseRepository(BcakesContext _db){
+        private readonly DbContext _dbContext;
+        public BaseRepository(DbContext _db){
             _dbContext = _db;
         }
 
-        public async Task InsertData(ClassInstance entity){
-            await _dbContext.Set<ClassInstance>().AddAsync(entity);
+        public async Task InsertData(T entity){
+            await _dbContext.Set<T>().AddAsync(entity);
         }
 
-        public async Task<List<ClassInstance>> GetAllDataAsync(){
-            var entities = await _dbContext.Set<ClassInstance>().ToListAsync();
+        public async Task<List<T>> GetAllDataAsync(){
+            var entities = await _dbContext.Set<T>().ToListAsync();
             return entities;
         }
 
-        public async Task<ClassInstance> GetDataAsync(object id){
-            var entity = await _dbContext.Set<ClassInstance>().FindAsync(id);
+        public async Task<T> GetDataAsync(object id){
+            var entity = await _dbContext.Set<T>().FindAsync(id);
             return entity;
         }
 
-        public void UpdateData(ClassInstance entity){
+        public void UpdateData(T entity){
             _dbContext.Entry(entity).State = EntityState.Modified;
         }
 
-        public void DeleteData(ClassInstance entity){
-            _dbContext.Set<ClassInstance>().Remove(entity);
+        public void DeleteData(T entity){
+            _dbContext.Set<T>().Remove(entity);
         }
 
         public async Task SaveDataAsync(){
             await _dbContext.SaveChangesAsync();
         }
 
-        public IQueryable<ClassInstance> QueryData(){
-            var entity = _dbContext.Set<ClassInstance>().AsQueryable();
+        public IQueryable<T> QueryData(){
+            var entity = _dbContext.Set<T>().AsQueryable();
             return entity;
         }
 
