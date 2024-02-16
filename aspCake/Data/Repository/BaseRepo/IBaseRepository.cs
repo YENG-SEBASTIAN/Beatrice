@@ -5,14 +5,14 @@ using System.Threading.Tasks;
 
 namespace aspCake.Data.Repository.BaseRepo
 {
-    public interface IBaseRepository<ClassInstance>
+    public interface IBaseRepository<T>
     {
-        Task InsertData(ClassInstance entity);
-        void UpdateData(ClassInstance entity);
-        Task<List<ClassInstance>> GetAllDataAsync();
-        Task<ClassInstance> GetDataAsync(object id);
-        void DeleteData(ClassInstance entity);
-        IQueryable<ClassInstance> QueryData();
+        Task InsertData(T entity);
+        void UpdateData(T entity);
+        Task<List<T>> GetAllDataAsync();
+        Task<T> GetDataAsync(object id);
+        void DeleteData(T entity);
+        IQueryable<T> QueryData();
         Task SaveDataAsync();
     }
 }
