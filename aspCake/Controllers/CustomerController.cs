@@ -34,5 +34,34 @@ namespace aspCake.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet("customers")]
+        public async Task<IActionResult> GetCustomers(){
+            try
+            {
+                var customers = await _customerService.GetAllDataAsync();
+                return Ok(customers);
+            }
+            catch (System.Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet("customer/{id}")]
+        public async Task<IActionResult> GetCustomer(int id){
+            try
+            {
+                var customer = await _customerService.GetDataAsync(id);
+                if(customer != null){
+                    return Ok(customer);
+                }
+                return BadRequest();
+            }
+            catch (System.Exception)
+            {
+                return BadRequest();
+            }
+        }
     }
 }
