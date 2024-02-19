@@ -32,9 +32,13 @@ namespace aspCake.Data.Repository.BaseRepo
             _dbContext.Entry(entity).State = EntityState.Modified;
         }
 
-        public async Task DeleteData(T entity, int id){
-            var entity =  await _dbContext.Set<T>().FindAsync(id);
-            _dbContext.Set<T>().Remove(entity);
+        public async Task DeleteData(object id){
+            var entity = await _dbContext.Set<T>().FindAsync(id);
+            if (entity != null)
+            {
+                _dbContext.Set<T>().Remove(entity);
+                await _dbContext.SaveChangesAsync();
+            }
         }
 
         public async Task SaveDataAsync(){

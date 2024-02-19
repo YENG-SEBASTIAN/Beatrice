@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using aspCake.Data.DTOs;
 using aspCake.Models;
@@ -7,47 +10,50 @@ namespace aspCake.Data.Service.Customer
 {
     public class CustomerService : ICustomerService
     {
-        private readonly BcakesContext _dbcontext;
+        private readonly BcakesContext _dbContext;
 
-        // public BcakesContext Dbcontext => _dbcontext;
-
-        public CustomerService(BcakesContext dbcontext)
+        public CustomerService(BcakesContext dbContext)
         {
-            _dbcontext = dbcontext;
+            _dbContext = dbContext;
         }
 
-        public async Task<bool> InsertData(CustomerDTO customerDTO){
-            aspCake.Models.Customer customer = new()
+        public async Task<bool> InsertData(CustomerDTO customerDTO)
+        {
+            var customer = new aspCake.Models.Customer
             {
                 FirstName = customerDTO.FirstName,
                 LastName = customerDTO.LastName,
                 Email = customerDTO.Email
             };
-            await _dbcontext.Customers.AddAsync(customer);
-            await _dbcontext.SaveChangesAsync();
+            await _dbContext.Customers.AddAsync(customer);
+            await _dbContext.SaveChangesAsync();
 
             return true;
         }
 
-        public async Task<bool> DeleteData(int id){
-            aspCake.Models.Customer customer = await _dbcontext.Customers.Where(x => x.id == id).FirstOrDefaultAsync();
-            if(customer == null){
+        public async Task<bool> DeleteData(int id)
+        {
+            var customer = await _dbContext.Customers.FindAsync(id);
+            if (customer == null)
+            {
                 return false;
             }
 
-            _dbcontext.Customers.Remove(customer);
-            await _dbcontext.SaveChangesAsync();
+            _dbContext.Customers.Remove(customer);
+            await _dbContext.SaveChangesAsync();
 
             return true;
         }
 
-        public async Task<CustomerDTO> GetDataAsync(int id){
-            aspCake.Models.Customer customer = await _dbcontext.Customers.Where(x => x.id = id).FirstOrDefaultAsync();
-            if(customer == null){
-                return new CustomerDTO();
+        public async Task<CustomerDTO> GetDataAsync(int id)
+        {
+            var customer = await _dbContext.Customers.FindAsync(id);
+            if (customer == null)
+            {
+                return null;
             }
 
-            CustomerDTO customerDTO = new()
+            var customerDTO = new CustomerDTO
             {
                 CustomerId = customer.CustomerId,
                 FirstName = customer.FirstName,
@@ -58,13 +64,10 @@ namespace aspCake.Data.Service.Customer
             return customerDTO;
         }
 
-        public async Task<List<CustomerDTO>> GetAllDataAsync(){
-            aspCake.Models.Customer customer = await _dbcontext.Customers.ToListAsync();
-            if(customer == null){
-                return new List<CustomerDTO>();
-            }
-
-            List<CustomerDTO> customerDTO = customer.Select(x => new CustomerDTO
+        public async Task<List<CustomerDTO>> GetAllDataAsync()
+        {
+            var customers = await _dbContext.Customers.ToListAsync();
+            var customerDTOs = customers.Select(x => new CustomerDTO
             {
                 CustomerId = x.CustomerId,
                 FirstName = x.FirstName,
@@ -72,13 +75,15 @@ namespace aspCake.Data.Service.Customer
                 Email = x.Email
             }).ToList();
 
-            return customerDTO;
+            return customerDTOs;
         }
 
-        public async Task<bool> UpdateData(CustomerDTO customerDTO, int id){
-            aspCake.Models.Customer customer = await _dbcontext.Customers.Where(x => x.id == id).FirstOrDefaultAsync();
+        public async Task<bool> UpdateData(CustomerDTO customerDTO, int id)
+        {
+            var customer = await _dbContext.Customers.FindAsync(id);
 
-            if(customer == null){
+            if (customer == null)
+            {
                 return false;
             }
 
@@ -86,11 +91,10 @@ namespace aspCake.Data.Service.Customer
             customer.LastName = customerDTO.LastName;
             customer.Email = customerDTO.Email;
 
-            _dbcontext.Customers.Update(customer);
-            await _dbcontext.SaveChangesAsync();
+            _dbContext.Customers.Update(customer);
+            await _dbContext.SaveChangesAsync();
 
             return true;
         }
-
     }
 }
