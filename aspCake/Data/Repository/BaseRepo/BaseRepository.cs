@@ -28,12 +28,17 @@ namespace aspCake.Data.Repository.BaseRepo
             return entity;
         }
 
-        public void UpdateData(T entity){
+        public void UpdateData(T entity, object id){
             _dbContext.Entry(entity).State = EntityState.Modified;
         }
 
-        public void DeleteData(T entity){
-            _dbContext.Set<T>().Remove(entity);
+        public async Task DeleteData(object id){
+            var entity = await _dbContext.Set<T>().FindAsync(id);
+            if (entity != null)
+            {
+                _dbContext.Set<T>().Remove(entity);
+                await _dbContext.SaveChangesAsync();
+            }
         }
 
         public async Task SaveDataAsync(){
