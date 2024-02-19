@@ -63,5 +63,37 @@ namespace aspCake.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpPut("customer/{id}")]
+        public async Task<IActionResult> UpdateData([FromBody] CustomerDTO customerDTO, int id){
+            try
+            {
+                bool result = await _customerService.UpdateData(customerDTO, id);
+                if(result == true){
+                    return Ok(result);
+                }
+                return BadRequest();
+            }
+            catch (System.Exception)
+            {
+                return BadRequest("Failed to update customer details");
+            }
+        }
+
+        [HttpDelete("customer/{id}")]
+        public async Task<IActionResult> DeleteCustomer(int id){
+            try
+            {
+                bool result = await _customerService.DeleteData(id);
+                if(result == true){
+                    return Ok();
+                }
+                return BadRequest();
+            }
+            catch (System.Exception)
+            {
+                return BadRequest("An error occured whiles deleting data");
+            }
+        }
     }
 }
