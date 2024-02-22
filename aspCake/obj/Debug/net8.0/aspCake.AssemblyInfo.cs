@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("aspCake")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5c007a2e88aab2b069c8e162df007b2236914ab9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+84a3757d87c35717e9bbbd9b76f43cb53446d68b")]
 [assembly: System.Reflection.AssemblyProductAttribute("aspCake")]
 [assembly: System.Reflection.AssemblyTitleAttribute("aspCake")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
